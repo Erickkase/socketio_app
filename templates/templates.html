@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"> <!-- Usa codificación UTF-8 para admitir caracteres especiales -->
+  <title>SocketIO</title> <!-- Título de la página que aparece en la pestaña del navegador -->
+</head>
+<body>
+  <h1>SocketIO</h1> <!-- Encabezado principal visible -->
+
+  <!-- Lista donde se mostrarán los mensajes recibidos -->
+  <ul id="messages"></ul>
+
+  <!-- Formulario para enviar mensajes al servidor -->
+  <form id="form">
+    <!-- Campo de texto donde se escribe el mensaje -->
+    <input id="input" autocomplete="off" placeholder="Escribe tu mensaje..." />
+    <!-- Botón para enviar el mensaje -->
+    <button>Enviar</button>
+  </form>
+
+  <!-- Carga la librería cliente de Socket.IO desde un CDN-->
+  <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+
+  <script>
+    // Establece una conexión con el servidor de Socket.IO
+    const socket = io();
+
+    // Obtiene referencias a elementos del DOM (HTML)
+    const form = document.getElementById('form');       // El formulario
+    const input = document.getElementById('input');     // El campo de entrada
+    const messages = document.getElementById('messages'); // La lista de mensajes
+
+    // Maneja el evento "submit" del formulario
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();           // Previene que el formulario recargue la página
+      if (input.value) {           // Si hay texto escrito
+        socket.send(input.value);  // Envía el mensaje al servidor usando evento 'message'
+        input.value = '';          // Limpia el campo de entrada después de enviar
+      }
+    });
+
+    // Maneja el evento 'message' que viene del servidor
+    socket.on('message', function(msg) {
+      const item = document.createElement('li'); // Crea un nuevo elemento de lista
+      item.textContent = msg;                    // Le asigna el mensaje recibido
+      messages.appendChild(item);                // Lo agrega a la lista de mensajes
+      window.scrollTo(0, document.body.scrollHeight); // Baja la vista al final de la página
+    });
+  </script>
+</body>
+</html>
