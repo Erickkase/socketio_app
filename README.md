@@ -24,7 +24,3 @@ docker run -p 5000:5000 socketio_app
 - `templates/templates.html`: plantilla HTML
 - `Dockerfile`: configuración de Docker
 - `requirements.txt`: dependencias
-
- ## Ejecutar en docker 
- docker pull erickkase/socketio_app
-docker run -p 5000:5000 erickkase/socketio_app
