@@ -5,8 +5,8 @@ Este proyecto usa Flask y Socket.IO para comunicación en tiempo real.
 ##  Ejecutar desde imagen pública (después de subir a Docker Hub)
 
 ```bash
-docker pull TU_USUARIO/socketio_app
-docker run -p 5000:5000 TU_USUARIO/socketio_app
+docker pull erickkase/socketio_app
+docker run -p 5000:5000 erickkase/socketio_app
 ```
 
 ## Ejecutar localmente (build propio)
